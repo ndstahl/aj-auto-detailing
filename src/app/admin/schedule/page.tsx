@@ -60,11 +60,11 @@ export default function SchedulePage() {
   return (
     <div>
       <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: '1.6rem', letterSpacing: '-0.02em', marginBottom: 8 }}>Schedule</h1>
-      <p style={{ color: '#333', fontSize: '0.85rem', marginBottom: 48 }}>Set your weekly hours and block off specific dates. Changes reflect immediately on the booking calendar.</p>
+      <p style={{ color: '#888', fontSize: '0.85rem', marginBottom: 48 }}>Set your weekly hours and block off specific dates. Changes reflect immediately on the booking calendar.</p>
 
       {/* Weekly schedule */}
       <div style={{ marginBottom: 56 }}>
-        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#2a2a2a', marginBottom: 20 }}>Weekly Hours</div>
+        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#aaa', marginBottom: 20 }}>Weekly Hours</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0, border: '1px solid rgba(255,255,255,0.05)', borderRadius: 10, overflow: 'hidden' }}>
           {availability.map((day, i) => (
             <div key={day.day_of_week} style={{
@@ -74,7 +74,7 @@ export default function SchedulePage() {
               background: i % 2 === 0 ? 'rgba(255,255,255,0.015)' : 'transparent',
               opacity: day.is_available ? 1 : 0.4,
             }}>
-              <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.85rem', color: day.is_available ? '#fff' : '#333' }}>{DAYS[day.day_of_week]}</div>
+              <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.85rem', color: day.is_available ? '#fff' : '#555' }}>{DAYS[day.day_of_week]}</div>
               <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
                 <input
                   type="checkbox"
@@ -86,17 +86,17 @@ export default function SchedulePage() {
               {day.is_available && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <span style={{ color: '#333', fontSize: '0.75rem' }}>From</span>
+                    <span style={{ color: '#888', fontSize: '0.75rem' }}>From</span>
                     <input type="time" value={day.start_time} onChange={e => updateDay(i, 'start_time', e.target.value)}
                       className="form-field" style={{ width: 100, padding: '6px 10px', fontSize: '0.8rem' }} />
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <span style={{ color: '#333', fontSize: '0.75rem' }}>To</span>
+                    <span style={{ color: '#888', fontSize: '0.75rem' }}>To</span>
                     <input type="time" value={day.end_time} onChange={e => updateDay(i, 'end_time', e.target.value)}
                       className="form-field" style={{ width: 100, padding: '6px 10px', fontSize: '0.8rem' }} />
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <span style={{ color: '#333', fontSize: '0.75rem' }}>Slot</span>
+                    <span style={{ color: '#888', fontSize: '0.75rem' }}>Slot</span>
                     <select value={day.slot_duration_minutes} onChange={e => updateDay(i, 'slot_duration_minutes', Number(e.target.value))}
                       className="form-field" style={{ width: 110, padding: '6px 10px', fontSize: '0.8rem' }}>
                       <option value={60}>1 hour</option>
@@ -115,8 +115,8 @@ export default function SchedulePage() {
 
       {/* Blocked dates */}
       <div style={{ marginBottom: 48 }}>
-        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#2a2a2a', marginBottom: 8 }}>Block Off Days</div>
-        <p style={{ color: '#2a2a2a', fontSize: '0.8rem', marginBottom: 20 }}>Click a date to block it (vacation, personal days, etc.).</p>
+        <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#aaa', marginBottom: 8 }}>Block Off Days</div>
+        <p style={{ color: '#888', fontSize: '0.8rem', marginBottom: 20 }}>Click a date to block it (vacation, personal days, etc.).</p>
         <div style={{ display: 'inline-block', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 12, padding: 24, background: 'rgba(255,255,255,0.02)' }}>
           <DayPicker
             mode="multiple"
@@ -125,13 +125,13 @@ export default function SchedulePage() {
             disabled={(date) => isBefore(date, startOfDay(new Date()))}
             fromMonth={new Date()}
             styles={{
-              root: { fontFamily: "'Space Grotesk', sans-serif", color: '#666' },
+              root: { fontFamily: "'Space Grotesk', sans-serif", color: '#888' },
               caption: { color: '#fff' },
-              head_cell: { color: '#333', fontSize: '0.75rem' },
-              day: { color: '#555', borderRadius: '6px' },
+              head_cell: { color: '#777', fontSize: '0.75rem' },
+              day: { color: '#aaa', borderRadius: '6px' },
               day_selected: { background: 'rgba(239,68,68,0.3)', color: '#ef4444', border: '1px solid rgba(239,68,68,0.4)' },
               day_today: { color: '#fff', fontWeight: 700 },
-              day_disabled: { color: '#1a1a1a' },
+              day_disabled: { color: '#444' },
             }}
           />
         </div>

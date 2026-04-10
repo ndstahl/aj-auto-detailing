@@ -22,7 +22,7 @@ export default async function AdminBookingsPage() {
   return (
     <div>
       <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: '1.6rem', letterSpacing: '-0.02em', marginBottom: 8 }}>Bookings</h1>
-      <p style={{ color: '#333', fontSize: '0.85rem', marginBottom: 40 }}>{upcoming.length} upcoming appointment{upcoming.length !== 1 ? 's' : ''}</p>
+      <p style={{ color: '#888', fontSize: '0.85rem', marginBottom: 40 }}>{upcoming.length} upcoming appointment{upcoming.length !== 1 ? 's' : ''}</p>
 
       <BookingTable title="Upcoming" bookings={upcoming} />
       {past.length > 0 && <BookingTable title="Past & Cancelled" bookings={past} muted />}
@@ -34,7 +34,7 @@ function BookingTable({ title, bookings, muted }: { title: string; bookings: any
   if (bookings.length === 0) return null
   return (
     <div style={{ marginBottom: 48 }}>
-      <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#2a2a2a', marginBottom: 16 }}>{title}</div>
+      <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#aaa', marginBottom: 16 }}>{title}</div>
       <div style={{ border: '1px solid rgba(255,255,255,0.05)', borderRadius: 10, overflow: 'hidden' }}>
         {bookings.map((b, i) => (
           <div key={b.id} style={{
@@ -46,17 +46,17 @@ function BookingTable({ title, bookings, muted }: { title: string; bookings: any
           }}>
             <div>
               <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: '0.85rem', color: '#fff' }}>{b.date}</div>
-              <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#444' }}>{b.time}</div>
+              <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888' }}>{b.time}</div>
             </div>
             <div>
               <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.85rem', color: '#ccc' }}>{b.name}</div>
-              <div style={{ fontSize: '0.75rem', color: '#333' }}>{b.phone}</div>
+              <div style={{ fontSize: '0.75rem', color: '#888' }}>{b.phone}</div>
             </div>
             <div>
-              <div style={{ fontSize: '0.8rem', color: '#555' }}>{b.service}</div>
-              <div style={{ fontSize: '0.75rem', color: '#2a2a2a' }}>{b.vehicle}</div>
+              <div style={{ fontSize: '0.8rem', color: '#aaa' }}>{b.service}</div>
+              <div style={{ fontSize: '0.75rem', color: '#777' }}>{b.vehicle}</div>
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#333', wordBreak: 'break-all' }}>{b.email}</div>
+            <div style={{ fontSize: '0.75rem', color: '#888', wordBreak: 'break-all' }}>{b.email}</div>
             <div>
               <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.68rem', fontWeight: 600, padding: '3px 8px', borderRadius: 4, background: 'rgba(255,255,255,0.04)', color: STATUS_COLORS[b.status] || '#666', border: `1px solid ${STATUS_COLORS[b.status] || '#333'}30`, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                 {b.status}
