@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
         <p style="margin-top: 24px; color: #aaa; font-size: 12px;">Booking ID: ${booking.id}</p>
       </div>
     `,
-  }).catch(err => console.error('Email send error:', err))
+  }).catch((err: any) => console.error('Email send error:', err))
 
   return NextResponse.json({ success: true, bookingId: booking.id })
 }
