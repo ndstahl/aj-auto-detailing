@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 :root {
   --bg: #080808;
@@ -162,3 +163,264 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
 }
 .form-field option { background: var(--bg3); }
+
+/* Leaflet Map Customization */
+.leaflet-popup-content-wrapper {
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.leaflet-popup-tip {
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.leaflet-control-zoom a {
+  background: #1a1a1a !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: #2a2a2a !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(26, 26, 26, 0.8) !important;
+  color: #888 !important;
+}
+
+.leaflet-control-attribution a {
+  color: #3b82f6 !important;
+}
+
+/* ============================================
+   MOBILE RESPONSIVENESS
+   ============================================ */
+
+/* Tablet and below (768px) */
+@media (max-width: 768px) {
+  /* Reduce section padding on tablets */
+  .section-pad {
+    padding: 64px 0;
+  }
+
+  /* Home page hero adjustments */
+  #hero {
+    min-height: auto !important;
+    padding: 120px 20px 60px !important;
+  }
+
+  /* Hide hero background image on mobile */
+  #hero > div:nth-child(3) {
+    display: none !important;
+  }
+
+  /* Adjust hero stats grid for tablets */
+  #hero .reveal > div[style*="grid-template-columns"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px 32px !important;
+    width: 100% !important;
+  }
+
+  /* Service area map legend */
+  #hero + section > div > div:last-child {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  /* Services grid - stack on tablet */
+  #services > div > div[style*="repeat(auto-fit"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Packages grid - 2 columns on tablet */
+  #packages > div > div[style*="repeat(auto-fill"] {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+  }
+
+  /* Why section - stack on tablet */
+  #why > div {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  /* Mission section */
+  #mission {
+    padding: 80px 20px !important;
+  }
+
+  /* Booking page calendar/slots layout - target by structure */
+  main > div > div[style*="grid-template-columns: auto 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Footer grid */
+  footer > div > div:first-child {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+    gap: 32px !important;
+  }
+}
+
+/* Mobile phones (480px and below) */
+@media (max-width: 480px) {
+  /* Further reduce section padding */
+  .section-pad {
+    padding: 48px 0;
+  }
+
+  /* Hero section */
+  #hero {
+    padding: 100px 16px 48px !important;
+  }
+
+  /* Stack hero stats into single column on small phones */
+  #hero .reveal > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding-top: 32px !important;
+  }
+
+  /* Reduce hero button padding */
+  #hero .glow-btn {
+    padding: 12px 24px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Service area map */
+  #hero + section {
+    padding: 60px 16px !important;
+  }
+
+  /* Carousel section */
+  #work {
+    padding: 64px 0 !important;
+  }
+
+  /* Services section */
+  #services {
+    padding: 64px 0 !important;
+  }
+
+  #services > div {
+    padding: 0 16px !important;
+  }
+
+  /* Make service cards full width */
+  #services > div > div[style*="repeat(auto-fit"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Packages section */
+  #packages {
+    padding: 64px 0 !important;
+  }
+
+  #packages > div {
+    padding: 0 16px !important;
+  }
+
+  /* Stack packages into single column */
+  #packages > div > div[style*="repeat(auto-fill"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  /* Why section */
+  #why {
+    padding: 64px 16px !important;
+  }
+
+  #why > div {
+    gap: 32px !important;
+  }
+
+  /* Mission section */
+  #mission {
+    padding: 64px 16px !important;
+  }
+
+  /* CTA section */
+  #mission + section {
+    padding: 60px 16px !important;
+  }
+
+  /* CTA buttons stack */
+  #mission + section .glow-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Footer */
+  footer {
+    padding: 48px 16px 24px !important;
+  }
+
+  footer > div > div:first-child {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    margin-bottom: 32px !important;
+  }
+
+  /* Footer bottom bar */
+  footer > div > div:last-child {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  /* Footer CTA buttons */
+  footer .glow-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  /* Quote page form - no changes needed, auto-fit handles it */
+
+  /* Quote success buttons - target by structure */
+  main > div > div[style*="textAlign: 'center'"] > div[style*="display: 'flex'"] {
+    flex-direction: column !important;
+  }
+
+  main > div > div[style*="textAlign: 'center'"] .glow-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Very small phones (360px and below) */
+@media (max-width: 360px) {
+  /* Reduce font sizes slightly */
+  h1 {
+    font-size: clamp(1.75rem, 8vw, 3rem) !important;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 7vw, 2.8rem) !important;
+  }
+
+  /* Further reduce padding */
+  #hero {
+    padding: 90px 12px 40px !important;
+  }
+
+  .section-pad {
+    padding: 40px 0;
+  }
+
+  /* Reduce button padding */
+  .glow-btn {
+    padding: 10px 20px !important;
+    font-size: 0.8rem !important;
+  }
+}

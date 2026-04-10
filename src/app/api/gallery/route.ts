@@ -19,6 +19,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid file type. Use JPG, PNG, WebP, or GIF.' }, { status: 400 })
   }
 
+  // Limit file size to 10MB
+  const MAX_FILE_SIZE = 10 * 1024 * 1024 // 10MB in bytes
+  if (file.size > MAX_FILE_SIZE) {
+    return NextResponse.json({ error: 'File too large. Maximum size is 10MB.' }, { status: 400 })
+  }
+
   const ext = file.name.split('.').pop()?.toLowerCase() || 'jpg'
   const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
 

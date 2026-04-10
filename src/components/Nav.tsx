@@ -1,8 +1,10 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useLanguage } from '@/lib/i18n/context'
 
 export default function Nav() {
+  const { t } = useLanguage()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -13,9 +15,9 @@ export default function Nav() {
   }, [])
 
   const links = [
-    { href: '#services', label: 'Services' },
-    { href: '#packages', label: 'Packages' },
-    { href: '/gallery', label: 'Gallery' },
+    { href: '/#services', label: t.nav.services },
+    { href: '/#packages', label: t.nav.packages },
+    { href: '/gallery', label: t.nav.gallery },
   ]
 
   return (
@@ -57,12 +59,12 @@ export default function Nav() {
           <a href="tel:8187402771" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.78rem', fontWeight: 600, color: '#777', letterSpacing: '0.05em', transition: 'color 0.2s', whiteSpace: 'nowrap' }}
             onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
             onMouseLeave={e => (e.currentTarget.style.color = '#777')}
-          >(818) 740-2771</a>
+          >{t.common.phone}</a>
           <Link href="/quote" className="glow-btn glow-btn-cyan" style={{ padding: '9px 20px', fontSize: '0.78rem' }}>
-            Get a Free Quote
+            {t.nav.getFreeQuote}
           </Link>
           <Link href="/booking" className="glow-btn glow-btn-green" style={{ padding: '9px 20px', fontSize: '0.78rem' }}>
-            Book Now
+            {t.nav.bookNow}
           </Link>
         </div>
 
@@ -94,8 +96,8 @@ export default function Nav() {
             >{l.label}</Link>
           ))}
           <div style={{ display: 'flex', gap: 12, marginTop: 20 }}>
-            <Link href="/quote" className="glow-btn glow-btn-cyan" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setMenuOpen(false)}>Get a Free Quote</Link>
-            <Link href="/booking" className="glow-btn glow-btn-green" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setMenuOpen(false)}>Book Now</Link>
+            <Link href="/quote" className="glow-btn glow-btn-cyan" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setMenuOpen(false)}>{t.nav.getFreeQuote}</Link>
+            <Link href="/booking" className="glow-btn glow-btn-green" style={{ flex: 1, justifyContent: 'center' }} onClick={() => setMenuOpen(false)}>{t.nav.bookNow}</Link>
           </div>
         </div>
       )}

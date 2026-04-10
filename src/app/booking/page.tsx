@@ -5,21 +5,12 @@ import Footer from '@/components/Footer'
 import { DayPicker } from 'react-day-picker'
 import 'react-day-picker/dist/style.css'
 import { format, isBefore, startOfDay, addMonths } from 'date-fns'
-
-const SERVICES = [
-  'Express Wash & Vacuum',
-  'Interior Detail',
-  'Exterior Wash & Polish',
-  'Full Detail (Interior + Exterior)',
-  'Paint Correction',
-  'Ceramic Coating',
-  'Engine Bay Clean',
-  'Other / Custom',
-]
+import { useLanguage } from '@/lib/i18n/context'
 
 type TimeSlot = { time: string; available: boolean }
 
 export default function BookingPage() {
+  const { t } = useLanguage()
   const [selectedDate, setSelectedDate] = useState<Date | undefined>()
   const [slots, setSlots] = useState<TimeSlot[]>([])
   const [selectedTime, setSelectedTime] = useState('')
@@ -94,20 +85,20 @@ export default function BookingPage() {
 
           {/* Header */}
           <div style={{ marginBottom: 56 }}>
-            <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#aaa', marginBottom: 14 }}>— Schedule</div>
-            <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 12 }}>Book an Appointment</h1>
-            <p style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.8 }}>Pick a date, choose a time, and we'll take it from there.</p>
+            <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#aaa', marginBottom: 14 }}>{t.booking.sectionLabel}</div>
+            <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 'clamp(2rem, 4vw, 3rem)', letterSpacing: '-0.02em', lineHeight: 1.1, marginBottom: 12 }}>{t.booking.heading}</h1>
+            <p style={{ color: '#888', fontSize: '0.9rem', lineHeight: 1.8 }}>{t.booking.description}</p>
           </div>
 
           {step === 'done' ? (
             <div style={{ textAlign: 'center', padding: '80px 24px', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, background: 'rgba(255,255,255,0.02)' }}>
               <div style={{ fontSize: '2.5rem', marginBottom: 20 }}>✓</div>
-              <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: '1.8rem', marginBottom: 12 }}>You're Booked!</h2>
+              <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: '1.8rem', marginBottom: 12 }}>{t.booking.successHeading}</h2>
               <p style={{ color: '#888', marginBottom: 8 }}>
-                <strong style={{ color: '#fff' }}>{format(selectedDate!, 'EEEE, MMMM d, yyyy')}</strong> at <strong style={{ color: '#fff' }}>{selectedTime}</strong>
+                <strong style={{ color: '#fff' }}>{format(selectedDate!, 'EEEE, MMMM d, yyyy')}</strong> {t.booking.at} <strong style={{ color: '#fff' }}>{selectedTime}</strong>
               </p>
-              <p style={{ color: '#888', fontSize: '0.9rem', marginBottom: 36 }}>AJ will be in touch to confirm your appointment. Check your email for details.</p>
-              <a href="/" className="glow-btn glow-btn-green">Back to Home</a>
+              <p style={{ color: '#888', fontSize: '0.9rem', marginBottom: 36 }}>{t.booking.successMessage}</p>
+              <a href="/" className="glow-btn glow-btn-green">{t.common.backToHome}</a>
             </div>
           ) : step === 'calendar' ? (
             <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 48, alignItems: 'start' }}>
@@ -136,15 +127,15 @@ export default function BookingPage() {
               {/* Time slots */}
               <div>
                 <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#aaa', marginBottom: 20 }}>
-                  {selectedDate ? `Available Times — ${format(selectedDate, 'MMM d')}` : 'Select a date to see times'}
+                  {selectedDate ? `${t.booking.availableTimes} — ${format(selectedDate, 'MMM d')}` : t.booking.selectDate}
                 </div>
 
                 {loadingSlots && (
-                  <div style={{ color: '#777', fontSize: '0.875rem' }}>Loading slots…</div>
+                  <div style={{ color: '#777', fontSize: '0.875rem' }}>{t.booking.loadingSlots}</div>
                 )}
 
                 {!loadingSlots && selectedDate && slots.length === 0 && (
-                  <div style={{ color: '#777', fontSize: '0.875rem', padding: '20px 0' }}>No available slots for this day.</div>
+                  <div style={{ color: '#777', fontSize: '0.875rem', padding: '20px 0' }}>{t.booking.noSlots}</div>
                 )}
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: 8 }}>
@@ -178,7 +169,7 @@ export default function BookingPage() {
                     className="glow-btn glow-btn-green"
                     style={{ marginTop: 32, padding: '12px 28px' }}
                   >
-                    Continue →
+                    {t.booking.continue}
                   </button>
                 )}
               </div>
@@ -194,41 +185,41 @@ export default function BookingPage() {
               </button>
 
               <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
-                <div style={{ gridColumn: '1 / -1', fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#aaa', marginBottom: 4 }}>Your Info</div>
+                <div style={{ gridColumn: '1 / -1', fontFamily: "'Space Grotesk', sans-serif", fontWeight: 600, fontSize: '0.8rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#aaa', marginBottom: 4 }}>{t.booking.yourInfo}</div>
 
                 <div>
-                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>Full Name *</label>
+                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>{t.booking.fullName} *</label>
                   <input className="form-field" required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="John Smith" />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>Email *</label>
+                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>{t.booking.email} *</label>
                   <input className="form-field" required type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="you@email.com" />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>Phone *</label>
+                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>{t.booking.phone} *</label>
                   <input className="form-field" required type="tel" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} placeholder="(818) 555-0000" />
                 </div>
                 <div>
-                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>Vehicle *</label>
+                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>{t.booking.vehicle} *</label>
                   <input className="form-field" required value={form.vehicle} onChange={e => setForm(f => ({ ...f, vehicle: e.target.value }))} placeholder="2021 Toyota Camry" />
                 </div>
                 <div style={{ gridColumn: '1 / -1' }}>
-                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>Service *</label>
+                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>{t.booking.service} *</label>
                   <select className="form-field" required value={form.service} onChange={e => setForm(f => ({ ...f, service: e.target.value }))}>
-                    <option value="">Select a service</option>
-                    {SERVICES.map(s => <option key={s}>{s}</option>)}
+                    <option value="">{t.booking.selectService}</option>
+                    {t.booking.services.map(s => <option key={s}>{s}</option>)}
                   </select>
                 </div>
                 <div style={{ gridColumn: '1 / -1' }}>
-                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>Notes</label>
-                  <textarea className="form-field" rows={3} value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} placeholder="Any specific concerns or requests?" style={{ resize: 'vertical' }} />
+                  <label style={{ display: 'block', fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.75rem', color: '#888', marginBottom: 6, letterSpacing: '0.05em' }}>{t.booking.notes}</label>
+                  <textarea className="form-field" rows={3} value={form.notes} onChange={e => setForm(f => ({ ...f, notes: e.target.value }))} placeholder={t.booking.notesPlaceholder} style={{ resize: 'vertical' }} />
                 </div>
 
                 {error && <div style={{ gridColumn: '1 / -1', color: '#ef4444', fontSize: '0.875rem', padding: '12px 16px', border: '1px solid rgba(239,68,68,0.2)', borderRadius: 6, background: 'rgba(239,68,68,0.05)' }}>{error}</div>}
 
                 <div style={{ gridColumn: '1 / -1' }}>
                   <button type="submit" disabled={submitting} className="glow-btn glow-btn-green" style={{ padding: '14px 36px', fontSize: '0.9rem', opacity: submitting ? 0.6 : 1 }}>
-                    {submitting ? 'Booking…' : 'Confirm Booking'}
+                    {submitting ? t.booking.booking : t.booking.confirmBooking}
                   </button>
                 </div>
               </form>
