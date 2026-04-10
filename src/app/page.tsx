@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import Nav from '@/components/Nav'
@@ -29,8 +29,10 @@ const ServiceAreaMap = dynamic(() => import('@/components/ServiceAreaMap'), {
 export default function Home() {
   const { t } = useLanguage()
   const revealRefs = useRef<(HTMLElement | null)[]>([])
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) }
@@ -40,6 +42,18 @@ export default function Home() {
     revealRefs.current.forEach(el => el && observer.observe(el))
     return () => observer.disconnect()
   }, [])
+
+  // Ensure all elements become visible after mount to handle language switches
+  useEffect(() => {
+    if (mounted) {
+      const timer = setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+          el.classList.add('visible')
+        })
+      }, 100)
+      return () => clearTimeout(timer)
+    }
+  }, [mounted, t])
 
   const addRef = (el: HTMLElement | null) => { if (el) revealRefs.current.push(el) }
 
