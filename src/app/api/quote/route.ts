@@ -54,3 +54,53 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ success: true, quoteId: quote.id })
 }
+
+export async function PATCH(req: NextRequest) {
+  const body = await req.json()
+  const { id, status } = body
+
+  if (!id || !status) {
+    return NextResponse.json({ error: 'Missing id or status' }, { status: 400 })
+  }
+
+  if (!['new', 'reviewed', 'quoted'].includes(status)) {
+    return NextResponse.json({ error: 'Invalid status' }, { status: 400 })
+  }
+
+  const supabase = await createServiceClient()
+
+  const { error } = await supabase
+    .from('quote_requests')
+    .update({ status })
+    .eq('id', id)
+
+  if (error) {
+    console.error('Quote update error:', error)
+    return NextResponse.json({ error: 'Failed to update quote' }, { status: 500 })
+  }
+
+  return NextResponse.json({ success: true })
+}
+
+export async function DELETE(req: NextRequest) {
+  const { searchParams } = new URL(req.url)
+  const id = searchParams.get('id')
+
+  if (!id) {
+    return NextResponse.json({ error: 'Missing id' }, { status: 400 })
+  }
+
+  const supabase = await createServiceClient()
+
+  const { error } = await supabase
+    .from('quote_requests')
+    .delete()
+    .eq('id', id)
+
+  if (error) {
+    console.error('Quote delete error:', error)
+    return NextResponse.json({ error: 'Failed to delete quote' }, { status: 500 })
+  }
+
+  return NextResponse.json({ success: true })
+}
