@@ -60,14 +60,29 @@ export default function Footer() {
           </div>
         </div>
 
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.04)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-          <span style={{ color: '#aaa', fontSize: '0.8rem' }} suppressHydrationWarning>© {new Date().getFullYear()} {t.footer.allRightsReserved}</span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <LanguageToggle />
-            <Link href="/admin" style={{ color: '#555', fontSize: '0.75rem', transition: 'color 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#aaa')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#555')}
-            >Admin</Link>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.04)', paddingTop: 24 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 12 }}>
+            <span style={{ color: '#aaa', fontSize: '0.8rem' }} suppressHydrationWarning>© {new Date().getFullYear()} {t.footer.allRightsReserved}</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+              <LanguageToggle />
+              <Link href="/admin" style={{ color: '#555', fontSize: '0.75rem', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#aaa')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#555')}
+              >Admin</Link>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <span style={{ color: '#555', fontSize: '0.7rem' }}>Powered by </span>
+            <a
+              href="https://www.ndsdigitalstudio.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#777', fontSize: '0.7rem', transition: 'color 0.2s', textDecoration: 'none' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#777')}
+            >
+              NDS Digital Studio
+            </a>
           </div>
         </div>
       </div>
