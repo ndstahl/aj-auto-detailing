@@ -27,28 +27,19 @@ const ServiceAreaMap = dynamic(() => import('@/components/ServiceAreaMap'), {
 })
 
 export default function Home() {
-  const { t, lang } = useLanguage()
+  const { t } = useLanguage()
   const revealRefs = useRef<(HTMLElement | null)[]>([])
 
   useEffect(() => {
-    revealRefs.current = [] // Reset refs when language changes
     const observer = new IntersectionObserver(
       entries => entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) }
       }),
       { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     )
-
-    // Small delay to ensure DOM is updated
-    const timeout = setTimeout(() => {
-      revealRefs.current.forEach(el => el && observer.observe(el))
-    }, 50)
-
-    return () => {
-      clearTimeout(timeout)
-      observer.disconnect()
-    }
-  }, [lang])
+    revealRefs.current.forEach(el => el && observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   const addRef = (el: HTMLElement | null) => { if (el) revealRefs.current.push(el) }
 
