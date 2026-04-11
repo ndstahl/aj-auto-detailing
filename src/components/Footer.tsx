@@ -45,14 +45,6 @@ export default function Footer() {
           <div>
             <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#777', marginBottom: 20 }}>{t.footer.contact}</div>
             <div style={{ color: '#aaa', fontSize: '0.875rem', marginBottom: 10 }}>San Fernando, CA</div>
-            <a href="tel:8187402771" style={{ display: 'block', color: '#aaa', fontSize: '0.875rem', marginBottom: 10, transition: 'color 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#aaa')}
-            >{t.common.phone}</a>
-            <a href="mailto:ajautodetailing2003@gmail.com" style={{ display: 'block', color: '#aaa', fontSize: '0.875rem', marginBottom: 10, transition: 'color 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#aaa')}
-            >ajautodetailing2003@gmail.com</a>
             <div style={{ display: 'flex', gap: 12, marginTop: 20 }}>
               <Link href="/booking" className="glow-btn glow-btn-green" style={{ padding: '8px 18px', fontSize: '0.78rem' }}>{t.common.bookNow}</Link>
               <Link href="/quote" className="glow-btn glow-btn-blue" style={{ padding: '8px 18px', fontSize: '0.78rem' }}>{t.common.getQuote}</Link>

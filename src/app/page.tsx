@@ -81,8 +81,6 @@ export default function Home() {
               "latitude": 34.2819,
               "longitude": -118.4390
             },
-            "telephone": "(818) 740-2771",
-            "email": "ajautodetailing2003@gmail.com",
             "priceRange": "$$$",
             "areaServed": {
               "@type": "GeoCircle",

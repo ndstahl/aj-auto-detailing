@@ -5,7 +5,7 @@ export const translations: Translations = {
     bookNow: 'Book Now',
     getQuote: 'Get a Free Quote',
     backToHome: 'Back to Home',
-    phone: '(818) 740-2771',
+    phone: 'Contact for Quote',
     loading: 'Loading…',
   },
 

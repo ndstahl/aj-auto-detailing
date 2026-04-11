@@ -56,10 +56,6 @@ export default function Nav() {
 
         {/* CTA */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }} className="hidden-mobile">
-          <a href="tel:8187402771" style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '0.78rem', fontWeight: 600, color: '#777', letterSpacing: '0.05em', transition: 'color 0.2s', whiteSpace: 'nowrap' }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
-            onMouseLeave={e => (e.currentTarget.style.color = '#777')}
-          >{t.common.phone}</a>
           <Link href="/quote" className="glow-btn glow-btn-cyan" style={{ padding: '9px 20px', fontSize: '0.78rem' }}>
             {t.nav.getFreeQuote}
           </Link>

@@ -5,7 +5,7 @@ export const translations: Translations = {
     bookNow: 'Reservar Ahora',
     getQuote: 'Cotización Gratis',
     backToHome: 'Volver al Inicio',
-    phone: '(818) 740-2771',
+    phone: 'Contacto para Cotización',
     loading: 'Cargando…',
   },
 
